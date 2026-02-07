@@ -17,14 +17,14 @@ app.use(express.static("public"));
 // const random_flag = flags[Math.floor(Math.random(flags) * flags.length)];
 
 let single_joke = [];
-let twopart_joke_setup = [];
-let twopart_joke_delivery = [];
+let twopart_joke_setup = {};
+let twopart_joke_delivery = {};
 
 app.get("/", async(req, res) =>{
     res.render("index.ejs", {single_joke : single_joke, twopart_joke_setup : twopart_joke_setup, twopart_joke_delivery : twopart_joke_delivery})
     single_joke = [];
-    twopart_joke_setup = [];
-    twopart_joke_delivery = [];
+    twopart_joke_setup = {};
+    twopart_joke_delivery = {};
 });
 
 
@@ -47,11 +47,11 @@ app.post("/joke", async(req, res) => {
 
                 else 
                 {
-                    twopart_joke_setup.push(joke['setup']);
-                    twopart_joke_delivery.push(joke['delivery']);
+                    twopart_joke_setup['Setup'] = (joke['setup']);
+                    twopart_joke_delivery['Delivery'] = (joke['delivery']);
                     console.log("TwoPart Joke")
-                    console.log(twopart_joke_setup);
-                    console.log(twopart_joke_delivery)
+                    console.log(twopart_joke_setup['Setup']);
+                    console.log(twopart_joke_delivery['Delivery'])
                 }
             
                 res.redirect("/")
@@ -62,11 +62,11 @@ app.post("/joke", async(req, res) => {
             }   
         }
 
-    } catch(error)
+    } catch(err)
     {
-       
-        res.status(404).json({message : "Please choose a category and a flag type."})
+       console.error(err);
     }
+  
     
 });
 app.listen(port, () => {

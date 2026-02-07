@@ -31,15 +31,15 @@
         </select>
         <br><br>
         <input type="submit" value="Submit" class="btn">
-        <div>
+        <div class="joke">
             <% if (locals.single_joke) { %>
                 <p><%= single_joke%></p>
              
             <% } %>
 
             <% if (locals.twopart_joke_setup) { %>
-                <p><%= twopart_joke_setup %></p><br>
-                <p><%= twopart_joke_delivery %></p>
+                <p><%= twopart_joke_setup['Setup'] %></p><br>
+                <p><%= twopart_joke_delivery['Delivery'] %></p>
             <% } %>
         </div>
     </form>
