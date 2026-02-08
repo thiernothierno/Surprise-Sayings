@@ -21,7 +21,7 @@ let twopart_joke_setup = {};
 let twopart_joke_delivery = {};
 
 app.get("/", async(req, res) =>{
-    res.render("index.ejs", {single_joke : single_joke, twopart_joke_setup : twopart_joke_setup, twopart_joke_delivery : twopart_joke_delivery})
+    res.render("index.ejs", {single : single_joke, twopart_setup : twopart_joke_setup, twopart_delivery : twopart_joke_delivery})
     single_joke = [];
     twopart_joke_setup = {};
     twopart_joke_delivery = {};
@@ -58,7 +58,7 @@ app.post("/joke", async(req, res) => {
         
             } catch(error)
             {
-                res.status(500).json({message : "Error fetching data."})
+                res.status(500).json({message : "Error fetching data."})  
             }   
         }
 
