@@ -29,44 +29,46 @@ app.get("/", async(req, res) =>{
 
 
 app.post("/joke", async(req, res) => {
-    const category = req.body['category_type'];
+    const category = req.body['category_type']; 
     const flag = req.body['flag_type'];
-    try{
-        if(category !== " " && flag !== " ")
+    if(category !== " " && flag !== " ")
+    {   
+        try
         {
-            try
+            const response = await axios.get(`${JOKE_API}/${category}/${flag}`);
+            const joke = response.data;
+            if (joke['type'] === 'single')
             {
-                const response = await axios.get(`${JOKE_API}/${category}/${flag}`);
-                const joke = response.data;
-                if (joke['type'] === 'single')
-                {
-                    single_joke.push(joke["joke"]);
-                    console.log("Single Joke");
-                    console.log(single_joke);
-                }
+                single_joke.push(joke["joke"]);
+                console.log("Single Joke");
+                console.log(single_joke);
+            }
 
-                else 
-                {
-                    twopart_joke_setup['Setup'] = (joke['setup']);
-                    twopart_joke_delivery['Delivery'] = (joke['delivery']);
-                    console.log("TwoPart Joke")
-                    console.log(twopart_joke_setup['Setup']);
-                    console.log(twopart_joke_delivery['Delivery'])
-                }
-            
-                res.redirect("/")
+            else 
+            {
+                twopart_joke_setup['Setup'] = (joke['setup']);
+                twopart_joke_delivery['Delivery'] = (joke['delivery']);
+                console.log("TwoPart Joke")
+                console.log(twopart_joke_setup['Setup']);
+                console.log(twopart_joke_delivery['Delivery'])
+            }
         
-            } catch(error)
-            {
-                res.status(500).json({message : "Error fetching data."})  
-            }   
-        }
+            res.redirect("/")
+    
+        } catch(error)
+        {
+            res.status(500).json({message : "Error fetching data."})  
+        } 
+        
+    } 
+    else {
+        try{
 
-    } catch(err)
-    {
-       console.error(err);
+        }catch(err){
+             res.render("index.ejs", {error : err.message})
+        }
+       
     }
-  
     
 });
 app.listen(port, () => {
