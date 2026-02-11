@@ -37,7 +37,7 @@ app.post("/joke", async(req, res) => {
             const joke = response.data;
             if (joke['type'] === 'single')
             {
-                single_joke.push(joke["joke"]);  
+                single_joke.push(joke["joke"]);   
                 console.log("Single Joke");
                 console.log(single_joke);
             }
