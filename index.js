@@ -10,11 +10,6 @@ const JOKE_API = "https://v2.jokeapi.dev/joke";
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(express.static("public"));
 
-// const categories = ["Programming", "Misc", "Pun", "Dark", "Spooky"];
-// const flags = ["nsfw", "religious", "political", "racist", "sexist", "explicit"];
-
-// const random_categorie = categories[Math.floor(Math.random(categories) * categories.length)];
-// const random_flag = flags[Math.floor(Math.random(flags) * flags.length)];
 
 let single_joke = [];
 let twopart_joke_setup = {};
@@ -31,15 +26,18 @@ app.get("/", async(req, res) =>{
 app.post("/joke", async(req, res) => {
     const category = req.body['category_type']; 
     const flag = req.body['flag_type'];
-    if(category !== " " && flag !== " ")
-    {   
-        try
-        {
+    console.log(category);
+    console.log(flag)
+    try{
+        if(category == " " || flag == " "){
+            res.render("error.ejs")
+        }
+        else{
             const response = await axios.get(`${JOKE_API}/${category}/${flag}`);
             const joke = response.data;
             if (joke['type'] === 'single')
             {
-                single_joke.push(joke["joke"]);
+                single_joke.push(joke["joke"]);  
                 console.log("Single Joke");
                 console.log(single_joke);
             }
@@ -52,23 +50,15 @@ app.post("/joke", async(req, res) => {
                 console.log(twopart_joke_setup['Setup']);
                 console.log(twopart_joke_delivery['Delivery'])
             }
-        
-            res.redirect("/")
     
-        } catch(error)
-        {
-            res.status(500).json({message : "Error fetching data."})  
-        } 
-        
-    } 
-    else {
-        try{
+            res.redirect("/")
 
-        }catch(err){
-             res.render("index.ejs", {error : err.message})
         }
-       
+
+    }catch(err){
+        console.log(err)
     }
+   
     
 });
 app.listen(port, () => {

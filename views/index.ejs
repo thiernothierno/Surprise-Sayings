@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css">
-    <title>Surprise-Sayings</title>
-</head>
-<body>
-    <h1>Surprise Sayings</h1>
+    <%- include("partials/header.ejs") %>
+     <h1>Surprise Sayings</h1>
     <form action="/joke" method="post">
         <label for="fun" class="type">Choose a category</label> 
         <select name="category_type" id="category_type" required> 
@@ -34,17 +26,11 @@
         <div class="joke">
             <% if (locals.single) { %>
                 <p><%= single%></p>
-            <% } if(locals.twopart_delivery && locals.twopart_setup) { %>
+            <% } if(locals.twopart_delivery && locals.twopart_setup) { %> 
                 <p><%= twopart_setup['Setup'] %></p><br>
                 <p><%= twopart_delivery['Delivery'] %></p>  
-            <% } if (locals.error) {%>
-            <p><%= error %></p>
-                <% } %>
-    
-             
-             
+            <% } %>
         </div>
     </form>
-</body>
-</html>
-
+<%- include("partials/footer.ejs") %>
+ 
