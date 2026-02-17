@@ -14,12 +14,15 @@ app.use(express.static("public"));
 let single_joke = [];
 let twopart_joke_setup = {};
 let twopart_joke_delivery = {};
+let currentYear = new Date().getFullYear();
 
 app.get("/", async(req, res) =>{
-    res.render("index.ejs", {single : single_joke, twopart_setup : twopart_joke_setup, twopart_delivery : twopart_joke_delivery})
+    res.render("index.ejs", {single : single_joke, twopart_setup : twopart_joke_setup, twopart_delivery : twopart_joke_delivery, currentYear : currentYear})
     single_joke = [];
     twopart_joke_setup = {};
     twopart_joke_delivery = {};
+    console.log(currentYear)
+   
 });
 
 
@@ -37,7 +40,7 @@ app.post("/joke", async(req, res) => {
             const joke = response.data;
             if (joke['type'] === 'single')
             {
-                single_joke.push(joke["joke"]);   
+                single_joke.push(joke["joke"]);     
                 console.log("Single Joke");
                 console.log(single_joke);
             }
