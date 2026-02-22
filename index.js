@@ -17,17 +17,17 @@ let twopart_joke_delivery = {};
 let currentYear = new Date().getFullYear();
 
 app.get("/", async(req, res) =>{
-    res.render("index.ejs", {single : single_joke, twopart_setup : twopart_joke_setup, twopart_delivery : twopart_joke_delivery, currentYear : currentYear})
+    res.render("index.ejs", {single : single_joke, twopart_setup : twopart_joke_setup, twopart_delivery : twopart_joke_delivery})
     single_joke = [];
     twopart_joke_setup = {};
     twopart_joke_delivery = {};
-    console.log(currentYear)
+   
    
 });
 
 
 app.post("/joke", async(req, res) => {
-    const category = req.body['category_type']; 
+    const category = req.body['category_type'];   
     const flag = req.body['flag_type'];
     console.log(category);
     console.log(flag)
