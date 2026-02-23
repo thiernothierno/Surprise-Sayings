@@ -17,10 +17,11 @@ let twopart_joke_delivery = {};
 let currentYear = new Date().getFullYear();
 
 app.get("/", async(req, res) =>{
-    res.render("index.ejs", {single : single_joke, twopart_setup : twopart_joke_setup, twopart_delivery : twopart_joke_delivery})
+    res.render("index.ejs", {single : single_joke, twopart_setup : twopart_joke_setup, twopart_delivery : twopart_joke_delivery, currentYear: currentYear})
     single_joke = [];
     twopart_joke_setup = {};
-    twopart_joke_delivery = {};
+    twopart_joke_delivery = {};  
+
    
    
 });
@@ -33,7 +34,7 @@ app.post("/joke", async(req, res) => {
     console.log(flag)
     try{
         if(category == " " || flag == " "){
-            res.render("error.ejs")
+            res.render("error.ejs", {currentYear : currentYear})
         }
         else{
             const response = await axios.get(`${JOKE_API}/${category}/${flag}`);
