@@ -15,9 +15,13 @@ let single_joke = [];
 let twopart_joke_setup = {};
 let twopart_joke_delivery = {};
 let currentYear = new Date().getFullYear();
+let Single_joke ;
+let Setup ;
+let Delivery;
 
 app.get("/", async(req, res) =>{
-    res.render("index.ejs", {single : single_joke, twopart_setup : twopart_joke_setup, twopart_delivery : twopart_joke_delivery, currentYear: currentYear})
+    res.render("index.ejs", {single : single_joke, twopart_setup : twopart_joke_setup, twopart_delivery : twopart_joke_delivery, currentYear: currentYear,
+    Single_joke : "Single-Joke", Setup : "Setup", Delivery : "Delivery"})
     single_joke = [];
     twopart_joke_setup = {};
     twopart_joke_delivery = {};  
@@ -43,7 +47,6 @@ app.post("/joke", async(req, res) => {
             {
                 single_joke.push(joke["joke"]);     
                 console.log("Single Joke");
-                console.log(single_joke);
             }
 
             else 
@@ -51,8 +54,6 @@ app.post("/joke", async(req, res) => {
                 twopart_joke_setup['Setup'] = (joke['setup']);
                 twopart_joke_delivery['Delivery'] = (joke['delivery']);
                 console.log("TwoPart Joke")
-                console.log(twopart_joke_setup['Setup']);
-                console.log(twopart_joke_delivery['Delivery'])
             }
     
             res.redirect("/")
