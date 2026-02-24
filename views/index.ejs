@@ -7,7 +7,7 @@
             <option value="Programming">Programming</option>
             <option value="Misc">Misc</option>
             <option value="Dark">Dark</option>
-            <option value="Spooky">Spooky</option>
+            <option value="Spooky">Spooky</option> 
             <option value="Pun">Pun</option>
         </select>
         <label for="fun" class="type">Choose a flag</label>
@@ -25,7 +25,9 @@
         <div class="joke">
             <% if (locals.single) { %>
                 <p><%= single%></p>
-            <% } if(locals.twopart_delivery && locals.twopart_setup) { %>   
+            <% } %> 
+
+            <% if(locals.twopart_delivery && locals.twopart_setup) { %>   
                 <p><%= twopart_setup['Setup'] %></p><br>
                 <p><%= twopart_delivery['Delivery'] %></p>  
             <% } %>
