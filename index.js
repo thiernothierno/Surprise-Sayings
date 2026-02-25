@@ -9,25 +9,24 @@ const JOKE_API = "https://v2.jokeapi.dev/joke";
 
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(express.static("public"));
-
+ 
 
 let single_joke = [];
 let twopart_joke_setup = {};
 let twopart_joke_delivery = {};
-let currentYear = new Date().getFullYear();
-let Single_joke ;
-let Setup ;
-let Delivery;
+let year = new Date().getFullYear();
+let month = new Date().getMonth() + 1;
+let date = new Date().getDate();
+
+
 
 app.get("/", async(req, res) =>{
-    res.render("index.ejs", {single : single_joke, twopart_setup : twopart_joke_setup, twopart_delivery : twopart_joke_delivery, currentYear: currentYear,
-    Single_joke : "Single-Joke", Setup : "Setup", Delivery : "Delivery"})
+    res.render("index.ejs", {single : single_joke, twopart_setup : twopart_joke_setup, twopart_delivery : twopart_joke_delivery, 
+    Single_joke : "Single-Joke", Setup : "Setup", Delivery : "Delivery" , year : year, month : month, date : date})
     single_joke = [];
     twopart_joke_setup = {};
     twopart_joke_delivery = {};    
 
-   
-   
 });
 
 
@@ -38,7 +37,7 @@ app.post("/joke", async(req, res) => {
     console.log(flag)
     try{
         if(category == " " || flag == " "){
-            res.render("error.ejs", {currentYear : currentYear})
+            res.render("error.ejs", {year : year, month : month, date : date})
         }
         else{
             const response = await axios.get(`${JOKE_API}/${category}/${flag}`);
@@ -57,7 +56,6 @@ app.post("/joke", async(req, res) => {
             }
     
             res.redirect("/")
-
         }
 
     }catch(err){
