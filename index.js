@@ -33,8 +33,6 @@ app.get("/", async(req, res) =>{
 app.post("/joke", async(req, res) => {
     const category = req.body['category_type'];   
     const flag = req.body['flag_type'];
-    console.log(category);
-    console.log(flag)
     try{
         if(category == " " || flag == " "){
             res.render("error.ejs", {year : year, month : month, date : date})
