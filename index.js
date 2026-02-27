@@ -38,7 +38,7 @@ app.post("/joke", async(req, res) => {
             res.render("error.ejs", {year : year, month : month, date : date})
         }
         else{
-            const response = await axios.get(`${JOKE_API}/${category}/${flag}`);
+            const response = await axios.get(`${JOKE_API}/${category}/${flag}`);  
             const joke = response.data;
             if (joke['type'] === 'single')
             {
