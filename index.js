@@ -22,7 +22,7 @@ let date = new Date().getDate();
 
 app.get("/", async(req, res) =>{
     res.render("index.ejs", {single : single_joke, twopart_setup : twopart_joke_setup, twopart_delivery : twopart_joke_delivery, 
-    joke : "Single-Joke", Setup : "Setup", Delivery : "Delivery" , year : year, month : month, date : date})
+    year : year, month : month, date : date})
     single_joke = [];
     twopart_joke_setup = {};
     twopart_joke_delivery = {};     
