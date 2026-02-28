@@ -7,7 +7,7 @@ const app = express();
 const port = 3000;
 const JOKE_API = "https://v2.jokeapi.dev/joke";
 
-app.use(bodyParser.urlencoded({extended : true}));
+app.use(bodyParser.urlencoded({extended : true}));  
 app.use(express.static("public"));
  
 
@@ -25,7 +25,7 @@ app.get("/", async(req, res) =>{
     Single_joke : "Single-Joke", Setup : "Setup", Delivery : "Delivery" , year : year, month : month, date : date})
     single_joke = [];
     twopart_joke_setup = {};
-    twopart_joke_delivery = {};    
+    twopart_joke_delivery = {};     
 
 });
 
